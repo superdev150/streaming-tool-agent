@@ -1,0 +1,66 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Ask the agent from a terminal and watch the events.
+ *
+ *   bin/ask "my notes are not syncing"                 real model (needs ANTHROPIC_API_KEY)
+ *   bin/ask --lang=es "¿cómo exporto a pdf?"
+ *   bin/ask --demo "how do I export a notebook?"       offline: scripted model, no key, no cost
+ *   bin/ask --search "export notebook pdf"             only the search index
+ */
+
+declare(strict_types=1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Showcase\Agent\Factory;
+use Showcase\Agent\KnowledgeBase;
+use Showcase\Agent\Model\AnthropicModel;
+use Showcase\Agent\Model\ScriptedModel;
+
+$args = array_slice($argv, 1);
+$flags = [];
+$words = [];
+foreach ($args as $a) {
+    if (preg_match('/^--(\w+)(?:=(.*))?$/', $a, $m)) {
+        $flags[$m[1]] = $m[2] ?? true;
+    } else {
+        $words[] = $a;
+    }
+}
+$question = implode(' ', $words);
+if ($question === '') {
+    fwrite(STDERR, "usage: bin/ask [--demo] [--search] [--lang=es] \"question\"\n");
+    exit(2);
+}
+
+$kb = KnowledgeBase::fromFile(__DIR__ . '/../data/help-center.json');
+
+if (isset($flags['search'])) {
+    foreach ($kb->search($question, 5) as $hit) {
+        printf("%6.2f  %-22s %s\n", $hit['score'], $hit['id'], $hit['title']);
+    }
+    exit;
+}
+
+$model = isset($flags['demo'])
+    ? new ScriptedModel([
+        ['tools' => [['search_help', ['query' => $question]]]],
+        ['tools' => [['get_article', ['ids' => [$kb->search($question, 1)[0]['id'] ?? 'plans']]],
+                     ['app_ui', ['actions' => [['type' => 'open_screen', 'target' => 'export', 'label' => 'Open Export']], 'replies' => ['Can I export everything?']]]]],
+        ['text' => ['Here is how: ', 'open the note, tap share and choose ', '**Export → PDF**.', "\n\n[[export-pdf]]"]],
+    ])
+    : AnthropicModel::fromEnv();
+
+$agent = Factory::agent($model, $kb, [['role' => 'user', 'content' => $question]], ['lang' => $flags['lang'] ?? 'en', 'platform' => 'ios']);
+$agent->open();
+
+$agent->drain(function (array $e) {
+    match ($e['t']) {
+        'text' => print($e['v']),
+        'done' => print("\n"),
+        default => fwrite(STDERR, "\n\033[2m" . json_encode($e, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\033[0m\n"),
+    };
+});
+fwrite(STDERR, "\033[2musage " . json_encode($agent->usage) . "\033[0m\n");

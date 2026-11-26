@@ -1,0 +1,73 @@
+{
+  "screens": {
+    "settings": "Settings",
+    "settings.sync": "Settings → Sync",
+    "settings.security": "Settings → Security",
+    "plans": "Plans",
+    "trash": "Trash",
+    "export": "Export",
+    "notebooks": "Notebooks"
+  },
+  "articles": [
+    {
+      "id": "sync-how",
+      "title": "How sync works",
+      "text": "Notes sync automatically across every device signed in to the same account. Changes upload a few seconds after you stop typing. Sync status shows as a small cloud icon at the top of each note: a check mark means synced, arrows mean syncing, and a slash means waiting for a connection. You can see the last successful sync in Settings → Sync."
+    },
+    {
+      "id": "sync-offline",
+      "title": "Using Lumen offline",
+      "text": "Lumen works fully offline. Notes you create or edit offline are saved on the device and upload the next time you are online. If the same note was edited on two devices while offline, Lumen keeps both versions: the newer one stays in the note and the other is saved in the note's History, so nothing is lost."
+    },
+    {
+      "id": "sync-troubleshoot",
+      "title": "Sync is stuck or a note is missing",
+      "text": "1. Check that both devices are signed in to the same account (Settings → Account). 2. Open Settings → Sync and tap Sync now. 3. If a note still does not appear, look in Trash: deleted notes stay there for 30 days. 4. Update the app to the latest version. If the problem continues, contact support from Settings → Help, and include the time of the last successful sync shown in Settings → Sync."
+    },
+    {
+      "id": "export-pdf",
+      "title": "Export a note or notebook as PDF",
+      "text": "Open the note, tap the share button and choose Export → PDF. To export a whole notebook, open Notebooks, long-press the notebook (right-click on the web) and choose Export. PDF export keeps images and checklists. Exporting a notebook with more than 500 notes is available on the Plus and Team plans."
+    },
+    {
+      "id": "export-markdown",
+      "title": "Export to Markdown or back up everything",
+      "text": "Settings → Export creates a .zip with every note as a Markdown file and attachments in folders, one folder per notebook. Use it as a full backup or to move to another app. The export is generated on the device and is never uploaded."
+    },
+    {
+      "id": "trash",
+      "title": "Restore a deleted note",
+      "text": "Deleted notes go to Trash and stay there for 30 days. Open Trash, select the note and tap Restore. After 30 days notes are removed permanently and cannot be recovered, not even by support. Empty Trash deletes everything in it immediately."
+    },
+    {
+      "id": "plans",
+      "title": "Free, Plus and Team plans",
+      "text": "Free: unlimited notes, 2 devices, 100 MB of attachments. Plus: unlimited devices, 10 GB of attachments, notebook export and note history for 1 year. Team: everything in Plus, shared notebooks and an admin console. Compare and change plans in Plans. Prices are shown in your local currency in the app store before you confirm."
+    },
+    {
+      "id": "subscription-cancel",
+      "title": "Cancel or change a subscription",
+      "text": "Subscriptions are managed by the store you bought from. On iPhone: Settings app → your name → Subscriptions → Lumen Notes. On Android: Google Play → Payments & subscriptions → Subscriptions. On the web: Plans → Manage. Cancelling keeps Plus until the end of the period you paid for; your notes are never deleted when a plan ends."
+    },
+    {
+      "id": "refunds",
+      "title": "Refunds",
+      "text": "Purchases made in the App Store or Google Play are refunded by Apple or Google under their policies: request it at reportaproblem.apple.com or in Google Play's order history. Web purchases can be refunded within 14 days by contacting support."
+    },
+    {
+      "id": "security-lock",
+      "title": "Lock the app with Face ID, fingerprint or a passcode",
+      "text": "Settings → Security → App lock. Choose Face ID, Touch ID, fingerprint or a 6-digit passcode, and when to lock: immediately, after 1 minute or after 15 minutes. If you forget the passcode, sign out and back in to reset it; your notes stay safe in your account."
+    },
+    {
+      "id": "security-encryption",
+      "title": "Is my data encrypted?",
+      "text": "Notes are encrypted in transit (TLS) and at rest on our servers. Plus and Team can enable end-to-end encryption for individual notebooks in Settings → Security: those notes can only be read on your devices, and if you lose your recovery key nobody, including support, can recover them."
+    },
+    {
+      "id": "notebooks",
+      "title": "Organise notes in notebooks and tags",
+      "text": "Create a notebook from Notebooks → New. Drag notes between notebooks, or use Move from a note's menu. Tags work across notebooks: type # followed by a word inside a note. Notebooks can be nested one level deep."
+    }
+  ]
+}

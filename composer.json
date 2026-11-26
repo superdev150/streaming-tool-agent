@@ -1,0 +1,28 @@
+{
+    "name": "superdev150/streaming-tool-agent",
+    "description": "A production-shaped tool-using agent on the Claude API in PHP: grounded answers from your own data, UI actions validated server-side, NDJSON streaming to a mobile app.",
+    "type": "project",
+    "license": "MIT",
+    "keywords": ["claude", "anthropic", "agent", "tool-use", "streaming", "ndjson", "rag"],
+    "require": {
+        "php": ">=8.2",
+        "anthropic-ai/sdk": "^1.3",
+        "guzzlehttp/guzzle": "^7.9"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5 || ^11.0"
+    },
+    "autoload": {
+        "psr-4": { "Showcase\\Agent\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Showcase\\Agent\\Tests\\": "tests/" }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "serve": "php -S 127.0.0.1:8080 -t public"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
